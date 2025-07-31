@@ -35,7 +35,7 @@ router.post('/', async (req, res) => {
         }
 
         const formattedHistory = formatChatHistory(history ? history : []);
-        console.log('Formatted History:', formattedHistory);
+        // console.log('Formatted History:', formattedHistory);
 
         const pinecone = new Pinecone({
             apiKey: process.env.PINECONE_API_KEY,
@@ -66,7 +66,10 @@ router.post('/', async (req, res) => {
 
         //~ chat assitant with previous conversation history
         const prompt = PromptTemplate.fromTemplate(
-            `You are a helpful assistant. Use the following conversation history and context to answer the current question.\n\nConversation History:\n{history}\n\nContext:\n{context}\n\nQuestion:\n{input}`
+            `You are a helpful assistant for Infozzle Software Solutions Pvt. Ltd. 
+            Only use the provided conversation history and context to answer the current question. 
+            If the question is not related to Infozzle or cannot be answered using the given context, politely respond with:
+            "I'm sorry, but I can only answer questions related to Infozzle Software Solutions Pvt. Ltd."\n\nConversation History:\n{history}\n\nContext:\n{context}\n\nQuestion:\n{input}`
         );
 
         const combineDocsChain = await createStuffDocumentsChain({
