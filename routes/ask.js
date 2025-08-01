@@ -73,9 +73,10 @@ router.post('/', async (req, res) => {
         const prompt = PromptTemplate.fromTemplate(
             `You are a helpful assistant for Infozzle Software Solutions Pvt. Ltd.
 
-            Use only the provided conversation history and context to answer the current question.
-            If the question is not related to Infozzle or cannot be answered using the given context, respond politely by saying:
-            "I'm sorry, I can only assist with questions related to Infozzle Software Solutions Pvt. Ltd."
+            Use the following conversation history and context to answer the current question.
+            If you cannot find a complete answer in the context, try to answer as accurately as possible using the available information.
+            If the context does not cover the question at all or it seems unrelated to Infozzle, respond with:
+            "I'm sorry, I can only assist with questions related to Infozzle Software Solutions Pvt. Ltd., and I couldn't find information about that in the context."
 
             You may respond to greetings or general friendly messages appropriately.\n\nConversation History:\n{history}\n\nContext:\n{context}\n\nQuestion:\n{input}`
         );
