@@ -65,17 +65,20 @@ router.post('/', async (req, res) => {
         // );
 
         //~ chat assitant with previous conversation history
-        const prompt = PromptTemplate.fromTemplate(
-            `You are a helpful assistant for Infozzle Software Solutions Pvt. Ltd. 
-            Only use the provided conversation history and context to answer the current question. 
-            \n\nConversation History:\n{history}\n\nContext:\n{context}\n\nQuestion:\n{input}`
-        );
         // const prompt = PromptTemplate.fromTemplate(
         //     `You are a helpful assistant for Infozzle Software Solutions Pvt. Ltd. 
         //     Only use the provided conversation history and context to answer the current question. 
-        //     If the question is not related to Infozzle or cannot be answered using the given context, politely respond with:
-        //     "I'm sorry, but I can only answer questions related to Infozzle Software Solutions Pvt. Ltd."\n\nConversation History:\n{history}\n\nContext:\n{context}\n\nQuestion:\n{input}`
+        //     \n\nConversation History:\n{history}\n\nContext:\n{context}\n\nQuestion:\n{input}`
         // );
+        const prompt = PromptTemplate.fromTemplate(
+            `You are a helpful assistant for Infozzle Software Solutions Pvt. Ltd.
+
+            Use only the provided conversation history and context to answer the current question.
+            If the question is not related to Infozzle or cannot be answered using the given context, respond politely by saying:
+            "I'm sorry, I can only assist with questions related to Infozzle Software Solutions Pvt. Ltd."
+
+            You may respond to greetings or general friendly messages appropriately.\n\nConversation History:\n{history}\n\nContext:\n{context}\n\nQuestion:\n{input}`
+        );
 
         const combineDocsChain = await createStuffDocumentsChain({
             llm:model,
