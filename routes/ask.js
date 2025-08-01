@@ -68,9 +68,14 @@ router.post('/', async (req, res) => {
         const prompt = PromptTemplate.fromTemplate(
             `You are a helpful assistant for Infozzle Software Solutions Pvt. Ltd. 
             Only use the provided conversation history and context to answer the current question. 
-            If the question is not related to Infozzle or cannot be answered using the given context, politely respond with:
-            "I'm sorry, but I can only answer questions related to Infozzle Software Solutions Pvt. Ltd."\n\nConversation History:\n{history}\n\nContext:\n{context}\n\nQuestion:\n{input}`
+            \n\nConversation History:\n{history}\n\nContext:\n{context}\n\nQuestion:\n{input}`
         );
+        // const prompt = PromptTemplate.fromTemplate(
+        //     `You are a helpful assistant for Infozzle Software Solutions Pvt. Ltd. 
+        //     Only use the provided conversation history and context to answer the current question. 
+        //     If the question is not related to Infozzle or cannot be answered using the given context, politely respond with:
+        //     "I'm sorry, but I can only answer questions related to Infozzle Software Solutions Pvt. Ltd."\n\nConversation History:\n{history}\n\nContext:\n{context}\n\nQuestion:\n{input}`
+        // );
 
         const combineDocsChain = await createStuffDocumentsChain({
             llm:model,
